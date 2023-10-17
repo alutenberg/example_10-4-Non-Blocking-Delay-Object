@@ -13,19 +13,27 @@
 
 typedef uint64_t tick_t;
 
-typedef struct{
-   tick_t startTime;
-   tick_t duration;
-   bool isRunning;
-} nonBlockingDelay_t;
+//=====[Declaration of public classes]=========================================
+
+class nonBlockingDelay {
+    public:
+        nonBlockingDelay(tick_t durationValue);
+        bool Read( );
+        void Write( tick_t durationValue );
+    private:
+        tick_t startTime;
+        tick_t duration;
+        bool isRunning;
+
+};
 
 //=====[Declarations (prototypes) of public functions]=========================
 
 void tickInit();
-
-void nonBlockingDelayInit( nonBlockingDelay_t* delay, tick_t durationValue );
-bool nonBlockingDelayRead( nonBlockingDelay_t* delay );
-void nonBlockingDelayWrite( nonBlockingDelay_t* delay, tick_t durationValue );
+//
+// void nonBlockingDelayInit( nonBlockingDelay_t* delay, tick_t durationValue );
+// bool nonBlockingDelayRead( nonBlockingDelay_t* delay );
+// void nonBlockingDelayWrite( nonBlockingDelay_t* delay, tick_t durationValue );
 
 //=====[#include guards - end]=================================================
 

@@ -25,7 +25,7 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-static nonBlockingDelay_t smartHomeSystemDelay;
+nonBlockingDelay smartHomeSystemDelay(SYSTEM_TIME_INCREMENT_MS);
 
 //=====[Declaration of external public global variables]=======================
 
@@ -40,7 +40,7 @@ static nonBlockingDelay_t smartHomeSystemDelay;
 void smartHomeSystemInit()
 {
     tickInit();
-    audioInit();
+/*    audioInit();
     userInterfaceInit();
     alarmInit();
     fireAlarmInit();
@@ -49,14 +49,16 @@ void smartHomeSystemInit()
     motorControlInit();
     gateInit();
     lightSystemInit();
-    sdCardInit();
-    nonBlockingDelayInit( &smartHomeSystemDelay, SYSTEM_TIME_INCREMENT_MS );
+    sdCardInit(); */
+//  nonBlockingDelayInit( &smartHomeSystemDelay, SYSTEM_TIME_INCREMENT_MS );
 }
 
 void smartHomeSystemUpdate()
 {
-    if( nonBlockingDelayRead(&smartHomeSystemDelay) ) {
-        userInterfaceUpdate();
+   char str[6] = "";
+   static int i=0;
+   if( smartHomeSystemDelay.Read( ) ) {
+/*      userInterfaceUpdate();
         fireAlarmUpdate();
         intruderAlarmUpdate();
         alarmUpdate();
@@ -64,7 +66,10 @@ void smartHomeSystemUpdate()
         pcSerialComUpdate();
         motorControlUpdate();
         lightSystemUpdate();
-        bleComUpdate();
+        bleComUpdate();*/
+        sprintf( str, "t: %d\n", i );
+        pcSerialComStringWrite( str );
+        i++;
     }    
 }
 
